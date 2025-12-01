@@ -26,35 +26,35 @@ jobs:
       - name: Build & Push Eureka
         uses: docker/build-push-action@v6
         with:
-          context: ./eureka-server
+          context: ./microservices/eureka-server
           push: true
           tags: |
-            yourdockerhub/eureka-server:latest
-            yourdockerhub/eureka-server:${{ github.sha }}
+            mtodorov08/eureka-server:latest
+            mtodorov08/eureka-server:${{ github.sha }}
 
       - name: Build & Push API Gateway
         uses: docker/build-push-action@v6
         with:
-          context: ./api-gateway
+          context: ./microservices/api-gateway
           push: true
           tags: |
-            yourdockerhub/api-gateway:latest
-            yourdockerhub/api-gateway:${{ github.sha }}
+            mtodorov08/api-gateway:latest
+            mtodorov08/api-gateway:${{ github.sha }}
 
       - name: Build & Push Book Service
         uses: docker/build-push-action@v6
         with:
-          context: ./book-service
+          context: ./microservices/book-service
           push: true
           tags: |
-            yourdockerhub/book-service:latest
-            yourdockerhub/book-service:${{ github.sha }}
+            mtodorov08/book-service:latest
+            mtodorov08/book-service:${{ github.sha }}
 
       - name: Build & Push Review Service
         uses: docker/build-push-action@v6
         with:
-          context: ./review-service
+          context: ./microservices/review-service
           push: true
           tags: |
-            yourdockerhub/review-service:latest
-            yourdockerhub/review-service:${{ github.sha }}
+            mtodorov08/review-service:latest
+            mtodorov08/review-service:${{ github.sha }}
