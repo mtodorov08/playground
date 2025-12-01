@@ -30,7 +30,7 @@ jobs:
         run: mvn -q -DskipTests package --file microservices/eureka-server/pom.xml
 
       - name: Build Book Service
-        run: mvn -q -DskipTests package --file microservices/book-service/pom.xml
+        run: mvn -q -DskipTests clean install --file microservices/book-service/pom.xml
 
       - name: Build API Gateway
         run: mvn -q -DskipTests package --file microservices/api-gateway/pom.xml
