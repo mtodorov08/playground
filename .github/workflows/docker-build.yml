@@ -26,8 +26,18 @@ jobs:
       # --------------------------
       # 2. Build all services with Maven
       # --------------------------
-      - name: Build all services with Maven
-        run: mvn -q -DskipTests package
+      - name: Build Eureka Server
+        run: mvn -q -DskipTests package --file microservices/eureka-server/pom.xml
+
+      - name: Build Book Service
+        run: mvn -q -DskipTests package --file microservices/book-service/pom.xml
+
+      - name: Build API Gateway
+        run: mvn -q -DskipTests package --file microservices/api-gateway/pom.xml
+
+      - name: Build Review Service
+        run: mvn -q -DskipTests package --file microservices/review-service/pom.xml
+
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
