@@ -1,0 +1,17 @@
+# Build Docker images
+docker compose build
+
+# run in background mode
+docker compose up -d
+
+# List running containers
+docker ps
+
+# Check logs
+docker compose logs -f
+
+# Graceful shutdown
+docker compose down
+
+# Remove everything (containers + images + volumes)
+docker compose down --volumes --rmi all
