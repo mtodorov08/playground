@@ -1,0 +1,20 @@
+# Eureka Dashboard
+http://localhost:8761
+
+# API Gateway
+http://localhost:8080
+
+# Book Service (via gateway)
+http://localhost:8080/book-service/api/books
+# Book Service
+http://localhost:8081/api/books
+
+# Book Service HTML view (via gateway)
+http://localhost:8080/book-service/books/view
+# Book Service HTML view
+http://localhost:8081/books/view
+
+# Review Service (via gateway)
+http://localhost:8080/review-service/api/reviews/book/{bookId}
+# Review Service
+http://localhost:8082/api/reviews/book/{bookId}
