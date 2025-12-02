@@ -1,10 +1,11 @@
 {
   "name": "Microservices Dev Environment",
   "image": "mcr.microsoft.com/devcontainers/java:17",
-  "postCreateCommand": "mvn -q -DskipTests package --file microservices/eureka-server/pom.xml && mvn -q -DskipTests install --file microservices/book-service/pom.xml && mvn -q -DskipTests package --file microservices/api-gateway/pom.xml && mvn -q -DskipTests package --file microservices/review-service/pom.xml",
-  "updateContentCommand": "docker compose down && docker compose up -d",
+  "postCreateCommand": "mvn -q -DskipTests package --file microservices/eureka-server/pom.xml && mvn -q -DskipTests install --file microservices/book-service/pom.xml && mvn -q -DskipTests package --file microservices/api-gateway/pom.xml && mvn -q -DskipTests package --file microservices/review-service/pom.xml && cd microservices && docker compose up -d",
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "moby": false
+    }
   },
   "customizations": {
     "vscode": {
