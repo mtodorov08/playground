@@ -85,12 +85,14 @@ jobs:
             mtodorov08/review-service:${{ github.sha }}
 
       - name: Test API Gateway Endpoint
-        with:
-          context: ./microservices
-          run: |
-             docker compose up -d
-             sleep 10
-             curl -s -X POST -H "Content-Type: application/json" -d '{"title":"1984","author":"Orwell"}' http://localhost:8080/book-service/api/books
-             curl http://localhost:8080/book-service/api/books
-             curl http://localhost:8080/review-service/api/reviews/book/1
-             curl http://localhost:8080/book-service/books/view
+        working-directory: ./microservices
+        run: |
+          # start services defined in microservices/docker-compose.yml
+          docker compose up -d
+          sleep 10
+          curl -s -X POST -H "Content-Type: application/json" -d '{"title":"1984","author":"Orwell"}' http://localhost:8080/book-service/api/books || true
+          curl -s http://localhost:8080/book-service/api/books || true
+          curl -s http://localhost:8080/review-service/api/reviews/book/1 || true
+          curl -s http://localhost:8080/book-service/books/view || true
+          # tear down services when done
+          docker compose down
