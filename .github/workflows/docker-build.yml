@@ -83,3 +83,12 @@ jobs:
           tags: |
             mtodorov08/review-service:latest
             mtodorov08/review-service:${{ github.sha }}
+
+      - name: Test API Gateway Endpoint
+        run: |
+           docker compose up -d
+           sleep 10
+           curl -s -X POST -H "Content-Type: application/json" -d '{"title":"1984","author":"Orwell"}' http://localhost:8080/book-service/api/books
+           curl http://localhost:8080/book-service/api/books
+           curl http://localhost:8080/review-service/api/reviews/book/1
+           curl http://localhost:8080/book-service/books/view
