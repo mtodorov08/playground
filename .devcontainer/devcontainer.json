@@ -1,0 +1,31 @@
+{
+  "name": "Microservices Dev Environment",
+  "image": "mcr.microsoft.com/devcontainers/java:17",
+  "postCreateCommand": "mvn -q -DskipTests package --file microservices/eureka-server/pom.xml && mvn -q -DskipTests install --file microservices/book-service/pom.xml && mvn -q -DskipTests package --file microservices/api-gateway/pom.xml && mvn -q -DskipTests package --file microservices/review-service/pom.xml",
+  "updateContentCommand": "docker compose down && docker compose up -d",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "mhutchie.git-graph",
+        "redhat.vscode-yaml"
+      ]
+    }
+  },
+  "forwardPorts": [
+    8761,
+    8080,
+    8081,
+    8082
+  ],
+  "portsAttributes": {
+    "8761": { "label": "Eureka Server" },
+    "8080": { "label": "API Gateway" },
+    "8081": { "label": "Book Service" },
+    "8082": { "label": "Review Service" }
+  },
+  "remoteUser": "vscode"
+}

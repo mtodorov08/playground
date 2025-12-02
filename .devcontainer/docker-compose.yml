@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  eureka-server:
+    build: ../microservices/eureka-server
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+
+  api-gateway:
+    build: ../microservices/api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka-server
+
+  book-service:
+    build: ../microservices/book-service
+    container_name: book-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - eureka-server
+
+  review-service:
+    build: ../microservices/review-service
+    container_name: review-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka-server
