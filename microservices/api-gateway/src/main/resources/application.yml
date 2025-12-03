@@ -7,6 +7,10 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
+  security:
+      user:
+        name: user
+        password: pass
 server:
   port: 8080
 

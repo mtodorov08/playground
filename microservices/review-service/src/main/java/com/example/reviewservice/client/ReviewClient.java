@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.example.bookservice.model.Book;
 
 
-@FeignClient(name = "book-service")
+@FeignClient(name = "book-service", configuration = FeignConfig.class)
 public interface ReviewClient
 {
     @GetMapping("/api/books/{id}")

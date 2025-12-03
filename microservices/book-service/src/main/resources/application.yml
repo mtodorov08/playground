@@ -13,6 +13,10 @@ spring:
   h2:
     console:
       enabled: true
+  security:
+    user:
+      name: user
+      password: pass
 server:
   port: 8081
 
