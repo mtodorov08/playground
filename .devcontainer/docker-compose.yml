@@ -2,13 +2,13 @@ version: "3.8"
 
 services:
   eureka-server:
-    build: ../microservices/eureka-server
+    image: mtodorov08/eureka-server:latest
     container_name: eureka-server
     ports:
       - "8761:8761"
 
   api-gateway:
-    build: ../microservices/api-gateway
+    image: mtodorov08/api-gateway:latest
     container_name: api-gateway
     ports:
       - "8080:8080"
@@ -16,7 +16,7 @@ services:
       - eureka-server
 
   book-service:
-    build: ../microservices/book-service
+    image: mtodorov08/book-service:latest
     container_name: book-service
     ports:
       - "8081:8081"
@@ -24,7 +24,7 @@ services:
       - eureka-server
 
   review-service:
-    build: ../microservices/review-service
+    image: mtodorov08/review-service:latest
     container_name: review-service
     ports:
       - "8082:8082"
