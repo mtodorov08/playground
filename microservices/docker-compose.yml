@@ -2,50 +2,50 @@ version: '3.9'
 
 services:
 
-  eureka:
+  eureka-server:
     container_name: eureka-server
     build: ./eureka-server
     ports:
       - "8761:8761"
-    networks:
-      - micro-net
+#    networks:
+#      - micro-net
 
   api-gateway:
     container_name: api-gateway
     build: ./api-gateway
     depends_on:
-      - eureka
+      - eureka-server
     ports:
       - "8080:8080"
     environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka/
-    networks:
-      - micro-net
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+#    networks:
+#      - micro-net
 
   book-service:
     container_name: book-service
     build: ./book-service
     depends_on:
-      - eureka
+      - eureka-server
     ports:
       - "8081:8081"
     environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka/
-    networks:
-      - micro-net
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+#    networks:
+#      - micro-net
 
   review-service:
     container_name: review-service
     build: ./review-service
     depends_on:
-      - eureka
+      - eureka-server
     ports:
       - "8082:8082"
     environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka/
-    networks:
-      - micro-net
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+#    networks:
+#      - micro-net
 
-networks:
-  micro-net:
-    driver: bridge
+#networks:
+#  micro-net:
+#    driver: bridge
