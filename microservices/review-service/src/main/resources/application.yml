@@ -1,6 +1,11 @@
 spring:
   application:
     name: review-service
+    
+  security:
+      user:
+        name: user
+        password: pass
 server:
   port: 8082
 
