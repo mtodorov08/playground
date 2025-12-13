@@ -1,18 +1,15 @@
 package com.example.bookservice.controller;
 
 
-import java.nio.charset.Charset;
 
 import org.hamcrest.core.Is;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-//import org.junit.Test;
-//import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -47,7 +44,9 @@ public class BookControllerTest
         String book = "{\"title\": \"1984\", \"author\" : \"O'Neel\"}";
         mockMvc.perform(MockMvcRequestBuilders.post("/api/books")
                                               .content(book)
-                                              .contentType(MediaType.APPLICATION_JSON))
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .with(SecurityMockMvcRequestPostProcessors.httpBasic("user", "pass"))
+                                              .with(SecurityMockMvcRequestPostProcessors.csrf()))
                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
@@ -59,7 +58,9 @@ public class BookControllerTest
         String book = "{\"title\": \"\", \"author\" : \"O'Neel\"}";
         mockMvc.perform(MockMvcRequestBuilders.post("/api/books")
                                               .content(book)
-                                              .contentType(MediaType.APPLICATION_JSON))
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .with(SecurityMockMvcRequestPostProcessors.httpBasic("user", "pass"))
+                                              .with(SecurityMockMvcRequestPostProcessors.csrf()))
                .andExpect(MockMvcResultMatchers.status().isBadRequest())
                .andExpect(MockMvcResultMatchers.jsonPath("$.title", Is.is("Title is mandatory")))
                .andExpect(MockMvcResultMatchers.content()

@@ -6,6 +6,15 @@ spring:
       user:
         name: user
         password: pass
+  cloud:
+      stream:
+        bindings:
+          bookCreatedConsumer-in-0:
+            destination: book.created
+            group: review-service
+  rabbitmq:
+      host: localhost
+      port: 5672
 server:
   port: 8082
 

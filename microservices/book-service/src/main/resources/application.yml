@@ -17,6 +17,14 @@ spring:
     user:
       name: user
       password: pass
+  cloud:
+      stream:
+        bindings:
+          bookCreatedSupplier-out-0:
+            destination: book.created
+  rabbitmq:
+      host: localhost
+      port: 5672
 server:
   port: 8081
 

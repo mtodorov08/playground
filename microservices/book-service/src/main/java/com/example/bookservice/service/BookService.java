@@ -2,8 +2,11 @@ package com.example.bookservice.service;
 
 
 import java.util.List;
+
 import org.springframework.stereotype.Service;
+
 import com.example.bookservice.model.Book;
+import com.example.bookservice.model.BookCreatedEvent;
 import com.example.bookservice.repository.BookRepository;
 
 
@@ -11,10 +14,12 @@ import com.example.bookservice.repository.BookRepository;
 public class BookService
 {
     private final BookRepository repo;
+    private final BookEventPublisher publisher;
 
-    public BookService(BookRepository repo)
+    public BookService(BookRepository repo, BookEventPublisher publisher)
     {
         this.repo = repo;
+        this.publisher = publisher;
     }
 
 
@@ -26,7 +31,9 @@ public class BookService
 
     public Book save(Book b)
     {
-        return repo.save(b);
+        Book book = repo.save(b);
+        publisher.publish(new BookCreatedEvent(book.getId(), book.getTitle()));
+        return book;
     }
 
 
