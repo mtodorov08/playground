@@ -1,0 +1,18 @@
+kubectl apply -f namespace.yml
+
+kubectl apply -f configmap.yml
+
+kubectl apply -f eureka-server.yml
+
+kubectl apply -f book-service.yml
+
+kubectl apply -f review-service.yml
+
+kubectl apply -f api-gateway.yml
+
+# verify
+kubectl get pods -n microservices
+kubectl get svc -n microservices
+
+# Get external IP:
+kubectl get svc -n microservices api-gateway

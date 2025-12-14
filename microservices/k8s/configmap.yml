@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: microservices-config
+  namespace: microservices
+data:
+  SPRING_RABBITMQ_HOST: "rabbitmq"
+  EUREKA_URL: "http://eureka-server:8761/eureka"
+  SECURITY_USER: "user"
+  SECURITY_PASSWORD: "pass"

@@ -1,0 +1,36 @@
+# install kind
+# Run exactly in the Codespaces terminal:
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64
+chmod +x ./kind
+sudo mv ./kind /usr/local/bin/kind
+
+# verify
+kind version
+
+# install kubectl
+sudo apt-get update && sudo apt-get install -y kubectl
+
+# verify
+kubectl version --client
+
+# create kind cluster
+kind create cluster --name microservices
+
+# verify
+kubectl get nodes
+
+# deploy
+kubectl apply -f namespace.yml
+
+kubectl apply -f configmap.yml
+
+kubectl apply -f eureka-server.yml
+
+kubectl apply -f book-service.yml
+
+kubectl apply -f review-service.yml
+
+kubectl apply -f api-gateway.yml
+
+# port-forward Api Gateway
+kubectl port-forward svc/api-gateway 8080:80 -n microservices
