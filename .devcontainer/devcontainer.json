@@ -3,7 +3,7 @@
   "image": "mcr.microsoft.com/devcontainers/java:17",
   //"postCreateCommand": "mvn -q -DskipTests package --file microservices/eureka-server/pom.xml && mvn -q -DskipTests install --file microservices/book-service/pom.xml && mvn -q -DskipTests package --file microservices/api-gateway/pom.xml && mvn -q -DskipTests package --file microservices/review-service/pom.xml && docker compose -f .devcontainer/docker-compose.yml down && docker compose -f .devcontainer/docker-compose.yml up --build -d",
   //"postCreateCommand": "bash .devcontainer/build.sh",
-  "postCreateCommand": "docker compose -f .devcontainer/docker-compose.yml down && docker compose -f .devcontainer/docker-compose.yml up --build -d",
+  "postCreateCommand": "docker compose -f .devcontainer/docker-compose.yml down && docker compose -f .devcontainer/docker-compose.yml up --build -d && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64 && chmod +x ./kind && sudo mv ./kind /usr/local/bin/kind && sudo apt-get update && sudo apt-get install -y kubectl && kind create cluster --name microservices",
   "updateContentCommand": "docker compose -f .devcontainer/docker-compose.yml down && docker compose -f .devcontainer/docker-compose.yml up --build -d",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
@@ -23,13 +23,15 @@
     8761,
     8080,
     8081,
-    8082
+    8082,
+    15672
   ],
   "portsAttributes": {
     "8761": { "label": "Eureka Server" },
     "8080": { "label": "API Gateway" },
     "8081": { "label": "Book Service" },
-    "8082": { "label": "Review Service" }
+    "8082": { "label": "Review Service" },
+    "15672": { "label": "RabbitMQ" }
   },
   "remoteUser": "vscode"
 }

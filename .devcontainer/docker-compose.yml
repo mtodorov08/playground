@@ -14,6 +14,7 @@ services:
       - "8080:8080"
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      EUREKA_INSTANCE_HOSTNAME: api-gateway
     depends_on:
       - eureka-server
 
@@ -24,6 +25,7 @@ services:
       - "8081:8081"
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      EUREKA_INSTANCE_HOSTNAME: book-service
       SPRING_RABBITMQ_HOST: rabbitmq
     depends_on:
       - eureka-server
@@ -35,6 +37,7 @@ services:
       - "8082:8082"
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      EUREKA_INSTANCE_HOSTNAME: review-service
       SPRING_RABBITMQ_HOST: rabbitmq
     depends_on:
       - eureka-server

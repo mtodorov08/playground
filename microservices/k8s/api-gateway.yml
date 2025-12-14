@@ -46,9 +46,10 @@ metadata:
   name: api-gateway
   namespace: microservices
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: api-gateway
   ports:
-    - port: 80
+    - port: 8080
       targetPort: 8080
+      nodePort: 30080
