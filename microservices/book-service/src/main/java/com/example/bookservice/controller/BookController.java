@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -32,6 +33,9 @@ public class BookController
 {
     private final BookService service;
 
+    @Value("${POD_NAME:unknown}")
+    private String podName;
+
     public BookController(BookService service)
     {
         this.service = service;
@@ -39,9 +43,13 @@ public class BookController
 
 
     @GetMapping
-    public List<Book> all()
+    public ResponseEntity<List<Book>> all()
     {
-        return service.findAll();
+        List<Book> books = service.findAll();
+
+        return ResponseEntity.ok()
+                        .header("X-Book-Service-Pod", podName)
+                        .body(books);
     }
 
 
