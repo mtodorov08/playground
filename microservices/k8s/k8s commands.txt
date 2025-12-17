@@ -14,5 +14,17 @@ kubectl apply -f api-gateway.yml
 kubectl get pods -n microservices
 kubectl get svc -n microservices
 
+# Persisted Volume
+kubectl apply -f book-pv.yml
+# Persisted Volume Claim
+kubectl apply -f book-pvc.yml
+
 # Get external IP:
 kubectl get svc -n microservices api-gateway
+
+# Recent cluster-wide events:
+kubectl get events -A --sort-by=.lastTimestamp | tail -n
+
+# Restart Deployment
+kubectl rollout restart deployment book-service -n microservices
+kubectl rollout restart deployment api-gateway -n microservices

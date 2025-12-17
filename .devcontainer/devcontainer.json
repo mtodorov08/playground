@@ -3,7 +3,7 @@
   "image": "mcr.microsoft.com/devcontainers/java:17",
   //"postCreateCommand": "mvn -q -DskipTests package --file microservices/eureka-server/pom.xml && mvn -q -DskipTests install --file microservices/book-service/pom.xml && mvn -q -DskipTests package --file microservices/api-gateway/pom.xml && mvn -q -DskipTests package --file microservices/review-service/pom.xml && docker compose -f .devcontainer/docker-compose.yml down && docker compose -f .devcontainer/docker-compose.yml up --build -d",
   //"postCreateCommand": "bash .devcontainer/build.sh",
-  "postCreateCommand": "docker compose -f .devcontainer/docker-compose.yml down && docker compose -f .devcontainer/docker-compose.yml up --build -d && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64 && chmod +x ./kind && sudo mv ./kind /usr/local/bin/kind && sudo apt-get update && sudo apt-get install -y kubectl && kind create cluster --name microservices",
+  "postCreateCommand": "docker compose -f .devcontainer/docker-compose.yml down && docker compose -f .devcontainer/docker-compose.yml up --build -d && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64 && chmod +x ./kind && sudo mv ./kind /usr/local/bin/kind && sudo apt-get update && sudo apt-get install -y kubectl && kind create cluster --name microservices && kubectl apply -f ./microservices/k8s/namespace.yml && kubectl apply -f ./microservices/k8s/configmap.yml && kubectl apply -f ./microservices/k8s/.",
   "updateContentCommand": "docker compose -f .devcontainer/docker-compose.yml down && docker compose -f .devcontainer/docker-compose.yml up --build -d",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
