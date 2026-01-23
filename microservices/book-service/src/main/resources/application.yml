@@ -35,3 +35,20 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+      
+unleash:
+  app-name: book-service
+  instance-id: ${spring.application.name}-${random.uuid}
+  api-url: http://localhost:4242/api
+  
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+      
+unleash:
+  fake: true
+  flags:
+    book-service-enabled: true

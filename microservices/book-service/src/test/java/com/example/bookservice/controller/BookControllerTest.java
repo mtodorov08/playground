@@ -19,6 +19,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.example.bookservice.repository.BookRepository;
 import com.example.bookservice.service.BookService;
 
+import io.getunleash.Unleash;
+
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
@@ -30,6 +32,9 @@ public class BookControllerTest
 
     @MockitoBean
     private BookService bookService;
+
+    @MockitoBean
+    private Unleash unleash;
 
     @Autowired
     BookController bookController;

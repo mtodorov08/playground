@@ -7,6 +7,15 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
+      routes:
+        - id: book-service
+          uri: lb://book-service
+          predicates:
+            - Path=/book-service/** 
+          filters:
+            - name: KillSwitchGatewayFilter
+              args:
+                flagName: book-service-enabled
   security:
       user:
         name: user
@@ -21,3 +30,19 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+      
+unleash:
+  app-name: api-gateway
+  instance-id: ${spring.application.name}-${random.uuid}
+  api-url: http://localhost:4242/api
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+        
+unleash:
+  fake: true
+  flags:
+    book-service-enabled: true

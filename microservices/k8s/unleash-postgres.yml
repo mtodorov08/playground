@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unleash-postgres
+  namespace: unleash
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: unleash-postgres
+  template:
+    metadata:
+      labels:
+        app: unleash-postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: unleash
+            - name: POSTGRES_USER
+              value: unleash
+            - name: POSTGRES_PASSWORD
+              value: unleash
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: unleash-postgres
+  namespace: unleash
+spec:
+  selector:
+    app: unleash-postgres
+  ports:
+    - port: 5432

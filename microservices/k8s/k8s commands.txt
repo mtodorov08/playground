@@ -10,6 +10,10 @@ kubectl apply -f review-service.yml
 
 kubectl apply -f api-gateway.yml
 
+kubectl apply -f unleash-postgres.yml
+
+kubectl apply -f unleash.yml
+
 # verify
 kubectl get pods -n microservices
 kubectl get svc -n microservices
@@ -28,3 +32,9 @@ kubectl get events -A --sort-by=.lastTimestamp | tail -n
 # Restart Deployment
 kubectl rollout restart deployment book-service -n microservices
 kubectl rollout restart deployment api-gateway -n microservices
+
+# Access Unleash UI
+kubectl port-forward svc/unleash 4242:4242 -n unleash
+# Open in browser:
+http://localhost:4242
+# Default credentials: admin/unleash

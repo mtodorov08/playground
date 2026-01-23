@@ -53,6 +53,13 @@
         <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
 
+    <dependency>
+        <groupId>io.getunleash</groupId>
+        <artifactId>unleash-client-java</artifactId>
+        <version>9.0.0</version>
+    </dependency>
+
+
   </dependencies>
 
   <dependencyManagement>

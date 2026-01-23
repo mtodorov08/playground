@@ -39,6 +39,8 @@ spec:
                   key: SECURITY_PASSWORD
             - name: EUREKA_INSTANCE_HOSTNAME
               value: "api-gateway"
+            - name: UNLEASH_API_URL
+            - value: "http://unleash.unleash.svc.cluster.local:4242/api"
           ports:
             - containerPort: 8080
 ---
