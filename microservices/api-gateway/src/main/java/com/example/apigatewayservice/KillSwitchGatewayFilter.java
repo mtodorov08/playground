@@ -1,7 +1,7 @@
 package com.example.apigatewayservice;
 
 import org.springframework.cloud.gateway.filter.GatewayFilter;
-import org.springframework.cloud.gateway.filter.factory.GatewayFilterFactory;
+import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +9,7 @@ import io.getunleash.Unleash;
 
 @Component
 public class KillSwitchGatewayFilter
-    implements GatewayFilterFactory<KillSwitchGatewayFilter.Config>
+    extends AbstractGatewayFilterFactory<KillSwitchGatewayFilter.Config>
 {
 
     private final Unleash unleash;
@@ -37,5 +37,13 @@ public class KillSwitchGatewayFilter
     public static class Config
     {
         public String flagName;
+
+        public String getFlagName() {
+            return flagName;
+        }
+
+        public void setFlagName(String flagName) {
+            this.flagName = flagName;
+        }
     }
 }
