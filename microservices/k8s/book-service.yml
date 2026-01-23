@@ -54,7 +54,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
             - name: UNLEASH_API_URL
-            - value: "http://unleash.unleash.svc.cluster.local:4242/api"
+              value: "http://unleash.unleash.svc.cluster.local:4242/api"
           ports:
             - containerPort: 8081
           volumeMounts:

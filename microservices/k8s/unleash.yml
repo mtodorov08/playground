@@ -25,6 +25,12 @@ spec:
               value: "false"
             - name: LOG_LEVEL
               value: info
+            - name: UNLEASH_ADMIN_USERNAME
+              value: admin
+            - name: UNLEASH_ADMIN_PASSWORD
+              value: unleash4all
+            - name: UNLEASH_ADMIN_EMAIL
+              value: admin@example.com
 ---
 apiVersion: v1
 kind: Service

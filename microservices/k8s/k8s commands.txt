@@ -37,4 +37,7 @@ kubectl rollout restart deployment api-gateway -n microservices
 kubectl port-forward svc/unleash 4242:4242 -n unleash
 # Open in browser:
 http://localhost:4242
-# Default credentials: admin/unleash
+# Default credentials: admin/unleash4all
+# check unleash logs
+kubectl logs deployment/unleash -n unleash
+
