@@ -31,6 +31,8 @@ spec:
               value: unleash4all
             - name: UNLEASH_ADMIN_EMAIL
               value: admin@example.com
+            - name: UNLEASH_AUTHENTICATION_REQUIRED
+              value: "false"
 ---
 apiVersion: v1
 kind: Service
