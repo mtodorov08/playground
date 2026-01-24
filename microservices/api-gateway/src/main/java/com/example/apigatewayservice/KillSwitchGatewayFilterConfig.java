@@ -1,15 +1,23 @@
 package com.example.apigatewayservice;
 
-public class KillSwitchGatewayFilterConfig {
+
+public class KillSwitchGatewayFilterConfig
+{
     private String flagName;
 
-    public KillSwitchGatewayFilterConfig() {}
+    public KillSwitchGatewayFilterConfig()
+    {
+    }
 
-    public String getFlagName() {
+
+    public String getFlagName()
+    {
         return flagName;
     }
 
-    public void setFlagName(String flagName) {
+
+    public void setFlagName(String flagName)
+    {
         this.flagName = flagName;
     }
 }

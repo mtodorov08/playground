@@ -25,7 +25,7 @@ public class KillSwitchGatewayFilter
     {
         return (exchange, chain) ->
         {
-            if (!unleash.isEnabled(config.flagName))
+            if (!unleash.isEnabled(config.getFlagName()))
             {
                 exchange.getResponse().setStatusCode(HttpStatus.SERVICE_UNAVAILABLE);
                 return exchange.getResponse().setComplete();
