@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import io.getunleash.Unleash;
-import io.getunleash.UnleashContext;
 
 
 @Component
@@ -30,8 +29,7 @@ public class KillSwitchGatewayFilter
         {
             return (exchange, chain) ->
             {
-                UnleashContext context = UnleashContext.builder().environment("development").build();
-                if (!unleash.isEnabled(config.getFlagName(), context))
+                if (!unleash.isEnabled(config.getFlagName()))
                 {
                     exchange.getResponse().setStatusCode(HttpStatus.SERVICE_UNAVAILABLE);
                     return exchange.getResponse().setComplete();

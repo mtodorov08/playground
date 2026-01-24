@@ -10,7 +10,6 @@ import com.example.bookservice.model.BookCreatedEvent;
 import com.example.bookservice.repository.BookRepository;
 
 import io.getunleash.Unleash;
-import io.getunleash.UnleashContext;
 
 
 @Service
@@ -62,8 +61,7 @@ public class BookService
 
     private void isBookServiceEnabled()
     {
-        UnleashContext context = UnleashContext.builder().environment("development").build();
-        if (!unleash.isEnabled(UNLEASH_FEATURE_FLAG_BOOK_SERVICE, context))
+        if (!unleash.isEnabled(UNLEASH_FEATURE_FLAG_BOOK_SERVICE))
         {
             throw new ServiceUnavailableException("Book service disabled");
         }
