@@ -42,7 +42,8 @@ http://localhost:4242
 # Create feature toggle "book-service-enabled"
 # paste the token in book-service.yml configmap under UNLEASH_API_TOKEN
 # paste the token in api-gateway.yml configmap under UNLEASH_API_TOKEN
-kubectl apply -f api-gateway.yml && kubectl apply -f book-service.yml && kubectl rollout restart deployment api-gateway -n microservices && kubectl rollout restart deployment book-service -n microservices
+# delete deployments and services of book-service and api-gateway
+kubectl delete deployment api-gateway -n micriservices && kubectl delete deployment book-service -n micriservices && kubectl delete servic api-gateway -n micriservices && kubectl delete service book-service -n micriservices && kubectl apply -f api-gateway.yml && kubectl apply -f book-service.yml
 
 # check unleash logs
 kubectl logs deployment/unleash -n unleash
