@@ -9,7 +9,7 @@ import io.getunleash.Unleash;
 
 @Component
 public class KillSwitchGatewayFilter
-    extends AbstractGatewayFilterFactory<KillSwitchGatewayFilter.Config>
+    extends AbstractGatewayFilterFactory<KillSwitchGatewayFilterConfig>
 {
 
     private final Unleash unleash;
@@ -21,7 +21,7 @@ public class KillSwitchGatewayFilter
 
 
     @Override
-    public GatewayFilter apply(Config config)
+    public GatewayFilter apply(KillSwitchGatewayFilterConfig config)
     {
         return (exchange, chain) ->
         {
@@ -32,18 +32,5 @@ public class KillSwitchGatewayFilter
             }
             return chain.filter(exchange);
         };
-    }
-
-    public static class Config
-    {
-        private String flagName;
-
-        public String getFlagName() {
-            return flagName;
-        }
-
-        public void setFlagName(String flagName) {
-            this.flagName = flagName;
-        }
     }
 }
