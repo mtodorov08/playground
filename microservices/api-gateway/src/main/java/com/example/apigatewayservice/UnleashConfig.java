@@ -16,12 +16,14 @@ public class UnleashConfig {
     public Unleash unleash(
                            @Value("${unleash.app-name}") String appName,
                            @Value("${unleash.instance-id}") String instanceId,
-                           @Value("${unleash.api-url}") String unleashApiUrl)
+                           @Value("${unleash.api-url}") String unleashApiUrl,
+                           @Value("${unleash.api-key:}") String apiKey)
     {
         return new DefaultUnleash(new io.getunleash.util.UnleashConfig.Builder()
                                                                                 .appName(appName)
                                                                                 .instanceId(instanceId)
                                                                                 .unleashAPI(unleashApiUrl)
+                                                                                .apiKey(apiKey)
                                                                                 .build());
     }
 }

@@ -40,7 +40,9 @@ spec:
             - name: EUREKA_INSTANCE_HOSTNAME
               value: "api-gateway"
             - name: UNLEASH_API_URL
-              value: "http://unleash.unleash.svc.cluster.local:4242/api/client"
+              value: "http://unleash.unleash.svc.cluster.local:4242/api"
+            - name: UNLEASH_API_KEY
+              value: "<your-client-api-token>"
           ports:
             - containerPort: 8080
 ---

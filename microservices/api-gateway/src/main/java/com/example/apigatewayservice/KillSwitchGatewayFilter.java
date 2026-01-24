@@ -36,7 +36,7 @@ public class KillSwitchGatewayFilter
 
     public static class Config
     {
-        public String flagName;
+        private String flagName;
 
         public String getFlagName() {
             return flagName;

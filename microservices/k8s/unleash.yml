@@ -13,6 +13,10 @@ spec:
       labels:
         app: unleash
     spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:16
+          command: ['pg_isready', '-h', 'unleash-postgres', '-p', '5432', '-U', 'unleash']
       containers:
         - name: unleash
           image: unleashorg/unleash-server:5
@@ -33,6 +37,9 @@ spec:
               value: admin@example.com
             - name: UNLEASH_AUTHENTICATION_REQUIRED
               value: "false"
+            - name: UNLEASH_CLIENT_API_TOKENS
+              value: "<your-client-api-token>"
+
 ---
 apiVersion: v1
 kind: Service
