@@ -33,7 +33,7 @@ public class KillSwitchGatewayFilter
             return (exchange, chain) ->
             {
                 UnleashContext context = UnleashContext.builder().environment("development").build();
-                boolean enabled = unleash.isEnabled(config.getFlagName(), context);
+                boolean enabled = unleash.isEnabled(config.getFlagName(), context, true);
                 LOG.info("KillSwitch check flag='{}' path='{}' enabled={}", config.getFlagName(), exchange.getRequest().getPath().value(), enabled);
                 if (!enabled)
                 {
