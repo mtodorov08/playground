@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import io.getunleash.Unleash;
+import io.getunleash.UnleashContext;
 
 
 @Component
@@ -31,15 +32,14 @@ public class KillSwitchGatewayFilter
         {
             return (exchange, chain) ->
             {
-                LOG.info("KillSwitchGatewayFilter checking feature flag '{}'", config.getFlagName());
-
-                if (!unleash.isEnabled(config.getFlagName()))
+                UnleashContext context = UnleashContext.builder().environment("development").build();
+                boolean enabled = unleash.isEnabled(config.getFlagName(), context);
+                LOG.info("KillSwitch check flag='{}' path='{}' enabled={}", config.getFlagName(), exchange.getRequest().getPath().value(), enabled);
+                if (!enabled)
                 {
-                    LOG.info("BookService feature flag '{}' is disabled", config.getFlagName());
                     exchange.getResponse().setStatusCode(HttpStatus.SERVICE_UNAVAILABLE);
                     return exchange.getResponse().setComplete();
                 }
-                LOG.info("BookService feature flag '{}' is enabled", config.getFlagName());
                 return chain.filter(exchange);
             };
         }

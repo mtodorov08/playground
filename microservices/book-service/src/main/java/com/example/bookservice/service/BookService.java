@@ -12,6 +12,7 @@ import com.example.bookservice.model.BookCreatedEvent;
 import com.example.bookservice.repository.BookRepository;
 
 import io.getunleash.Unleash;
+import io.getunleash.UnleashContext;
 
 
 @Service
@@ -66,11 +67,12 @@ public class BookService
     {
         LOG.info("BookService checking feature flag '{}'", UNLEASH_FEATURE_FLAG_BOOK_SERVICE);
 
-        if (!unleash.isEnabled(UNLEASH_FEATURE_FLAG_BOOK_SERVICE))
+        UnleashContext context = UnleashContext.builder().environment("development").build();
+        boolean enabled = unleash.isEnabled(UNLEASH_FEATURE_FLAG_BOOK_SERVICE, context);
+        LOG.info("BookService feature flag '{}' is enabled={}", UNLEASH_FEATURE_FLAG_BOOK_SERVICE, enabled);
+        if (!enabled)
         {
-            LOG.info("BookService feature flag '{}' is disabled", UNLEASH_FEATURE_FLAG_BOOK_SERVICE);
             throw new ServiceUnavailableException("Book service disabled");
         }
-        LOG.info("BookService feature flag '{}' is enabled", UNLEASH_FEATURE_FLAG_BOOK_SERVICE);
     }
 }

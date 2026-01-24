@@ -31,8 +31,6 @@ public class UnleashConfig {
                                                                                 .unleashAPI(unleashApiUrl)
                                                                                 .environment(environment)
                                                                                 .apiKey(apiKey)
-                                                                                .synchronousFetchOnInitialisation(true)
-                                                                                .fetchTogglesInterval(15) // seconds, optional
                                                                                 .build());
     }
 }
