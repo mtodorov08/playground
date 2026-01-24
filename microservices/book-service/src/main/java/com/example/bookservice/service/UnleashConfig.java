@@ -23,7 +23,7 @@ public class UnleashConfig {
                            @Value("${unleash.environment:development}") String environment)
     {
         Logger LOG = LoggerFactory.getLogger(UnleashConfig.class);
-        LOG.info("UnleashConfig initializing: appName='{}' instanceId='{}' apiUrl='{}' environment='{}' apiKeyPresent={}", appName, instanceId, unleashApiUrl, environment, apiKey);
+        LOG.info("UnleashConfig initializing: appName='{}' instanceId='{}' apiUrl='{}' environment='{}' apiKeyPresent={}", appName, instanceId, unleashApiUrl, environment, !apiKey.isBlank());
 
         return new DefaultUnleash(new io.getunleash.util.UnleashConfig.Builder()
                                                                                 .appName(appName)

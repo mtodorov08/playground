@@ -65,8 +65,6 @@ public class BookService
 
     private void isBookServiceEnabled()
     {
-        LOG.info("BookService checking feature flag '{}'", UNLEASH_FEATURE_FLAG_BOOK_SERVICE);
-
         UnleashContext context = UnleashContext.builder().environment("development").build();
         boolean enabled = unleash.isEnabled(UNLEASH_FEATURE_FLAG_BOOK_SERVICE, context);
         LOG.info("BookService feature flag '{}' is enabled={}", UNLEASH_FEATURE_FLAG_BOOK_SERVICE, enabled);
