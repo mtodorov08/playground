@@ -3,6 +3,8 @@ package com.example.bookservice.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.example.bookservice.model.Book;
@@ -16,6 +18,7 @@ import io.getunleash.Unleash;
 public class BookService
 {
     public static final String UNLEASH_FEATURE_FLAG_BOOK_SERVICE = "book-service-enabled";
+    private static final Logger LOG = LoggerFactory.getLogger(BookService.class);
 
     private final BookRepository repo;
     private final BookEventPublisher publisher;
@@ -61,9 +64,13 @@ public class BookService
 
     private void isBookServiceEnabled()
     {
+        LOG.info("BookService checking feature flag '{}'", UNLEASH_FEATURE_FLAG_BOOK_SERVICE);
+
         if (!unleash.isEnabled(UNLEASH_FEATURE_FLAG_BOOK_SERVICE))
         {
+            LOG.info("BookService feature flag '{}' is disabled", UNLEASH_FEATURE_FLAG_BOOK_SERVICE);
             throw new ServiceUnavailableException("Book service disabled");
         }
+        LOG.info("BookService feature flag '{}' is enabled", UNLEASH_FEATURE_FLAG_BOOK_SERVICE);
     }
 }

@@ -25,13 +25,14 @@ public class UnleashConfig {
         Logger LOG = LoggerFactory.getLogger(UnleashConfig.class);
         LOG.info("UnleashConfig initializing: appName='{}' instanceId='{}' apiUrl='{}' environment='{}' apiKeyPresent={}", appName, instanceId, unleashApiUrl, environment, apiKey);
 
-
         return new DefaultUnleash(new io.getunleash.util.UnleashConfig.Builder()
                                                                                 .appName(appName)
                                                                                 .instanceId(instanceId)
                                                                                 .unleashAPI(unleashApiUrl)
                                                                                 .environment(environment)
                                                                                 .apiKey(apiKey)
+                                                                                .synchronousFetchOnInitialisation(true)
+                                                                                .fetchTogglesInterval(15) // seconds, optional
                                                                                 .build());
     }
 }
