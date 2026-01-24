@@ -1,5 +1,7 @@
 package com.example.bookservice.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +22,10 @@ public class UnleashConfig {
                            @Value("${unleash.api-key:}") String apiKey,
                            @Value("${unleash.environment:development}") String environment)
     {
+        Logger LOG = LoggerFactory.getLogger(UnleashConfig.class);
+        LOG.info("UnleashConfig initializing: appName='{}' instanceId='{}' apiUrl='{}' environment='{}' apiKeyPresent={}", appName, instanceId, unleashApiUrl, environment, apiKey);
+
+
         return new DefaultUnleash(new io.getunleash.util.UnleashConfig.Builder()
                                                                                 .appName(appName)
                                                                                 .instanceId(instanceId)

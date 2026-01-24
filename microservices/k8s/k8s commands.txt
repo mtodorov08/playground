@@ -38,6 +38,12 @@ kubectl port-forward svc/unleash 4242:4242 -n unleash
 # Open in browser:
 http://localhost:4242
 # Default credentials: admin/unleash4all
+# Create Client API token for SDK access for environment "development"
+# Create feature toggle "book-service-enabled"
+# paste the token in book-service.yml configmap under UNLEASH_API_TOKEN
+# paste the token in api-gateway.yml configmap under UNLEASH_API_TOKEN
+kubectl apply -f api-gateway.yml && kubectl apply -f book-service.yml && kubectl rollout restart deployment api-gateway -n microservices && kubectl rollout restart deployment book-service -n microservices
+
 # check unleash logs
 kubectl logs deployment/unleash -n unleash
 
